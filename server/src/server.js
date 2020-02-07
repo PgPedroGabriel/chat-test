@@ -1,4 +1,6 @@
-import server from './app';
+import app from './app';
 import './socket/index';
 
-server.listen(process.env.PORT || 300);
+const { server } = app;
+
+server.listen(process.env.PORT || 3000);
