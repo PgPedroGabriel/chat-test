@@ -5,7 +5,7 @@ class Channel {
   }
 
   addMessage(message) {
-    this.messages.push(message);
+    this.messages.unshift(message);
   }
 }
 

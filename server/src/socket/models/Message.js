@@ -1,8 +1,8 @@
 class Message {
-  constructor(user, channel, content) {
+  constructor(user, text, createdAt = null) {
     this.user = user;
-    this.channel = channel;
-    this.content = content;
+    this.text = text;
+    this.createdAt = createdAt === null ? new Date() : createdAt;
   }
 }
 

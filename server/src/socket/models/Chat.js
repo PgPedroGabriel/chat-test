@@ -23,8 +23,21 @@ class Chat {
     this.users[username] = new User(username);
   }
 
-  getChannelNames() {
-    return Object.keys(this.channels);
+  getChannels() {
+    return Object.values(this.channels).map(channel => {
+      return { ...channel, messages: channel.messages.slice(0, 2) };
+    });
+  }
+
+  containsChannel(name) {
+    return typeof this.channels[name] !== 'undefined';
+  }
+
+  getChannel(name) {
+    if (!this.containsChannel(name)) {
+      throw new Error('Invalid channel name');
+    }
+    return this.channels[name];
   }
 
   getUsernames() {

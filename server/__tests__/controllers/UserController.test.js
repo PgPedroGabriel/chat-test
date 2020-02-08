@@ -1,7 +1,7 @@
 import request from 'supertest';
 import app from '../../src/app';
 
-describe('Controllers -> ChatController', () => {
+describe('Controllers -> UserController', () => {
   const { server } = app;
 
   it('user can be joined on chat', () => {
