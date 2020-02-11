@@ -1,6 +1,6 @@
-import Channel from '../../../src/socket/models/Channel';
-import Message from '../../../src/socket/models/Message';
-import User from '../../../src/socket/models/User';
+import Channel from '../../src/models/Channel';
+import Message from '../../src/models/Message';
+import User from '../../src/models/User';
 
 describe('Socket -> Model -> Channel', () => {
   it('channel can be created', () => {

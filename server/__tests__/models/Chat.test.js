@@ -1,6 +1,6 @@
-import Chat from '../../../src/socket/models/Chat';
-import Channel from '../../../src/socket/models/Channel';
-import User from '../../../src/socket/models/User';
+import Chat from '../../src/models/Chat';
+import Channel from '../../src/models/Channel';
+import User from '../../src/models/User';
 
 describe('Socket -> Model -> Chat', () => {
   it('chat can be created', () => {

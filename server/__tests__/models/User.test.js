@@ -1,4 +1,4 @@
-import User from '../../../src/socket/models/User';
+import User from '../../src/models/User';
 
 describe('Socket -> Model -> User', () => {
   it('user can be created', () => {

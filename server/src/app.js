@@ -2,7 +2,9 @@ import express from 'express';
 import cors from 'cors';
 
 import routes from './routes';
-import Chat from './socket/models/Chat';
+import Chat from './models/Chat';
+
+import 'dotenv/config';
 
 class App {
   constructor() {

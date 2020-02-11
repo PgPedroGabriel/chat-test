@@ -1,4 +1,4 @@
-import User from '../socket/models/User';
+import User from '../models/User';
 
 class UserController {
   join(req, res) {

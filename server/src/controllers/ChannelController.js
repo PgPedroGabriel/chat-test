@@ -1,5 +1,5 @@
-import Channel from '../socket/models/Channel';
-import Message from '../socket/models/Message';
+import Channel from '../models/Channel';
+import Message from '../models/Message';
 
 class UserController {
   create(req, res) {
@@ -43,6 +43,30 @@ class UserController {
     channelObject.addMessage(message);
 
     return res.send(message);
+  }
+
+  getChannel(req, res) {
+    const { channel } = req.params;
+
+    const { chat } = req;
+
+    if (!channel || !chat.containsChannel(channel)) {
+      return res.status(400).send('invalid channel');
+    }
+
+    const next = parseInt(req.query.next, 10) || 0;
+
+    if (typeof next !== 'number') {
+      return res.status(400).send('invalid next param');
+    }
+
+    const pageSize = process.env.PAGE_SIZE || 20;
+
+    const channelObj = chat.getChannel(channel);
+
+    const messages = channelObj.getLatestMessages(next, pageSize);
+
+    return res.send(messages);
   }
 }
 

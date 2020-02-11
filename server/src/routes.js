@@ -15,6 +15,7 @@ routes.get('/v1/users', UserController.list);
 
 // CHANNELS
 routes.get('/v1/channels', ChannelController.list);
+routes.get('/v1/channels/:channel', ChannelController.getChannel);
 
 // POST requests
 routes.post('/v1/join', UserController.join);
