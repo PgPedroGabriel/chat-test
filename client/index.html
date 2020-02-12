@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" ng-app="WebChat">
+<head>
+      <meta charset="UTF-8">
+      <title>Web Chat</title>
+
+      <!-- Bootstrap Core CSS -->
+      <link href="css/bootstrap.css" rel="stylesheet">
+
+      <!-- Custom CSS -->
+      <link href="css/simple-sidebar.css" rel="stylesheet">
+      <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+      <div ng-view class="main-layout"></div>
+
+      <!-- vendor -->
+      <script src="lib/jquery.js"></script>
+      <script src="lib/angular.js"></script>
+      <script src="lib/angular-route.js"></script>
+      <script src="lib/angular-resource.js"></script>
+      <script src="lib/bootstrap.js"></script>
+      <script src="lib/ngGravatar.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/md5.js"></script>
+      <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+      <script src="lib/socket.io.js"></script>
+      <script src="lib/angular-socket/socket.js"></script>
+      <script src="lib/pnglib.js"></script>
+      <script src="lib/identicon.js"></script>
+
+      <!-- App -->
+      <script src="app/app.js"></script>
+      <script src="app/routes.js"></script>
+      <!-- Filters -->
+      <script src="app/filters/channelFilter.js"></script>
+      <script src="app/filters/emailFilter.js"></script>
+      <!-- Models -->
+      <script src="app/models/user-compiled.js"></script>
+      <script src="app/models/channel-compiled.js"></script>
+      <script src="app/models/DMChannel-compiled.js"></script>
+      <script src="app/models/message-compiled.js"></script>
+      <!-- Controllers -->
+      <script src="app/chat/chatController.js"></script>
+      <script src="app/login/loginController-compiled.js"></script>
+      <!-- Directives -->
+      <script src="app/directives/avatar/avatar.js"></script>
+      <!-- Services -->
+      <script src="app/services/socket.js"></script>
+      <script src="app/services/socketEvents.js"></script>
+      <script src="app/services/users-compiled.js"></script>
+      <script src="app/services/notifications-compiled.js"></script>
+      <script src="app/services/channels-compiled.js"></script>
+      <script src="app/services/events-compiled.js"></script>
+
+</body>
+</html>

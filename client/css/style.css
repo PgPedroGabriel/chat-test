@@ -1,0 +1,168 @@
+body {
+  position: absolute;
+  height: 100%;
+  min-height: 100%;
+  width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.bold {
+      font-weight: bold;
+}
+
+.flex-container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+}
+
+.chat-wrapper {
+
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  height: 100%;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.main-layout {
+      display: flex;
+      flex-grow: 1;
+      flex-direction: column;
+      height: 100%;
+};
+
+.chat-container {
+      height: 100%;
+      width: 100%;
+}
+
+.header {
+  display: flex;
+  flex: 1 1 5%;
+  min-height: 3em;
+  max-height: 3em;
+}
+
+.pin-horizontally {
+      width: 100%;
+}
+
+.chat-body {
+  display: flex;
+  flex: 1 1 85%;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: flex-start;
+  overflow: auto;
+  margin-top: 10px;
+
+}
+
+.section-header {
+      margin-left: 10px;
+}
+
+.footer {
+  flex: 1 1 10%;
+  min-height: 5em;
+  max-height: 5em;
+}
+
+.nav {
+
+  width: 200px;
+  border-right: solid;
+  /* border-style: solid; */
+  border-width: 1px;
+  overflow: hidden;
+  border-color: rgb(213, 213, 213);
+
+}
+
+.layout {
+  height: 100%;
+  display: flex;
+
+}
+
+.message-item {
+      display: flex;
+      margin-bottom: 20px;       /* Distance between messages */
+}
+
+
+.avatar {
+      display: flex;
+      width: 60px;
+      height: 60px;
+      display: inline;
+      border-radius: 5px;
+}
+
+.message-container {
+      flex: 1 1;
+      display: flex;
+      flex-direction: column;
+      margin-left: 10px;
+}
+
+.message-container.meta {
+      display: flex;
+      align-items: baseline;
+}
+
+.text-box-container {
+      display: flex;
+      align-items: baseline;
+}
+
+.message-list {
+      width: 100%;
+}
+
+.footer.content > img,
+.footer.content > p {
+    display: inline-block;
+}
+
+.message-area {
+       flex: 1 100%;
+}
+.account-info {
+      margin-top: 20px;
+      margin-left: 10px;
+      margin-right: 10px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+}
+.account-info p {
+      margin: 0;
+      text-overflow: ellipsis;
+}
+
+.notification p {
+      text-align: center;
+      color: gray;
+}
+
+.center-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+}
+
+.login-wrapper {
+      align-self: center;
+      margin: auto;
+
+
+}

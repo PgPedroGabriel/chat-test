@@ -1,0 +1,16 @@
+<div class="center-container">
+      <div class="login-wrapper">
+            <h1>Login</h1>
+            <form name="loginForm" class="form-inline" ng-submit="loginCtrl.processLogin()">
+                  <h3 class="title">What's your nickname?</h3>
+                  <div class="form-group">
+                        <input type="text" ng-model="loginCtrl.username"  class="form-control" />
+                        <button type="submit" class="btn btn-primary">Go</button>
+
+                  </div>
+            </form>
+            <br />
+            <a href='' ng-click="loginCtrl.processLogin(true)">Continue with default username</a>
+            <p>{{loginCtrl.info}}</p>
+      </div>
+</div>

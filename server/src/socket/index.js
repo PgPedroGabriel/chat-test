@@ -1,12 +1,26 @@
 import SocketIO from 'socket.io';
 import http from 'http';
 import app from '../app';
-import events from './events/index';
+import {
+  description as addUserEvent,
+  handler as addUserHandler,
+} from './events/AddUser';
+
+import {
+  description as NewMessageEvent,
+  handler as NewMessageHandler,
+} from './events/NewMessage';
 
 const io = new SocketIO(http.createServer(app));
 
 io.on('connection', socket => {
-  Object.keys(events).forEach(key =>
-    socket.on(events[key].description, events[key].handler)
-  );
+  socket.on(addUserEvent, username => {
+    const chat = app.server.get('chat');
+    addUserHandler(chat, socket, username);
+  });
+
+  socket.on(NewMessageEvent, data => {
+    const chat = app.server.get('chat');
+    NewMessageHandler(chat, socket, data);
+  });
 });

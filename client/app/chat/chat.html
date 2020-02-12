@@ -1,0 +1,62 @@
+<div class="layout">
+      <div class="flex-container nav">
+            <div class="header">
+                  <h3 class="section-header">Web Chat</h3>
+            </div>
+            <div class=" chat-body">
+                  <p class="section-header">Channels ({{(channels | filter:{isChannel: true}).length }})</p>
+                  <ul class="sidebar-nav">
+                        <li ng-repeat="channel in channels | filter:{isChannel: true}"
+                              ng-class="{'active' : isActive(channel)}"><a href=""
+                                    ng-click="toggleChannel(channel)"
+                                    ng-class="{bold : channel.hasUnreadMessage}">{{channel.name | channel }}</a></li>
+                  </ul>
+                  <p class="section-header">Users</p>
+                  <ul class="sidebar-nav">
+                        <li ng-repeat="channel in channels | filter:{isDM: true}"
+                              ng-class="{'active' : isActive(channel)}">
+                              <a href="" ng-click="toggleChannel(channel)"
+                                    ng-class="{'bold' : channel.hasUnreadMessage}">{{channel.user.name}} <span
+                                          ng-show="channel.hasUnreadMessage">({{channel.unreadCount}})</span></a>
+                        </li>
+                  </ul>
+            </div>
+            <div class="footer">
+                  <div class="account-info">
+                        <p><strong>{{currentUser.name}}</strong></p>
+                        <p>Available</p>
+                  </div>
+            </div>
+      </div>
+
+      <div class="chat-wrapper">
+            <div class="header">
+                  <h3>{{chatCtrl.channel.name | channel: chatCtrl.channel.isDM}}</h3>
+            </div>
+            <div class="chat-body">
+                  <div class="message-list">
+                        <div ng-repeat="message in chatCtrl.channel.messages" class="message-item {{message.type}}">
+                              <avatar user="message.user" ng-if="message.isUserMessage"></avatar>
+                              <div class="message-container">
+                                    <div class="meta">
+                                          <span class="author"
+                                                ng-if="message.isUserMessage"><strong>{{message.user.name}}</strong></span><span
+                                                class="date"> {{message.createdAt | date: 'h:mm a'}}</span>
+                                    </div>
+                                    <p>{{message.text}}</p>
+                              </div>
+                        </div>
+                  </div>
+            </div>
+            <div class="chat footer">
+                  <div class="message-area">
+                        <p>{{chatCtrl.channel.status}}&nbsp</p>
+                        <form name="messageForm" ng-submit="send()" class="chat" style="width: 100%;">
+                              <input id="m" class="form-control" ng-model="message.text" autocomplete="off"
+                                    placeholder="Type a message" ng-change="textBoxDidUpdate()" />
+                        </form>
+                  </div>
+
+            </div>
+      </div>
+</div>
