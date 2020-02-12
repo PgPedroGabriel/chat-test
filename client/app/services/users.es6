@@ -33,7 +33,7 @@ class Users {
       }
 
       getExistingUsersRequest() {
-            return $http({method: 'get', url: '/users'});
+            return $http({method: 'get', url: 'http://localhost:3000/users'});
       }
 
       getExistingActiveUsers() {

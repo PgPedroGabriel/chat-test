@@ -43,7 +43,7 @@ class Events {
 
       getExistingActiveUsers() {
             var self = this;
-            this.$http({method: 'get', url: '/users'}).then(function successCallback(response) {
+            this.$http({method: 'get', url: 'http://localhost:3000/users'}).then(function successCallback(response) {
                   var users = response.data;
                   self.activeUsers = users;
                   self.hasDownloadUsers = true;
@@ -71,7 +71,7 @@ class Events {
                   message: {text: text}
             };
 
-            self.$http({method: 'post', url: '/v1/channels/' + self.Channels.activeChannel.id, data: {
+            self.$http({method: 'post', url: 'http://localhost:3000/v1/channels/' + self.Channels.activeChannel.id, data: {
                   text: text,
                   sender: self.Users.getUser().name,
                   all: aMessage
@@ -84,7 +84,7 @@ class Events {
 
                   self.Notifications.send(message.user.name + ': ' + message.text);
 
-                  self.$http({method: 'get', url: '/v1/channels/' + self.Channels.activeChannel.id }).then(function(res) {
+                  self.$http({method: 'get', url: 'http://localhost:3000/v1/channels/' + self.Channels.activeChannel.id }).then(function(res) {
                         self.Channels.activeChannel.messages = res.data.map(m => {
                               return new Message(m.all.text, m.all.user, new Date());
                         }).reverse()

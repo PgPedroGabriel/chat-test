@@ -9,7 +9,7 @@ class LoginController {
 
       attemptToLogin(username) {
             const self = this;
-            this.$http({method: 'get', url: '/users/available?username=' + username}).then(function successCallback(response) {
+            this.$http({method: 'get', url: 'http://localhost:3000/users/available?username=' + username}).then(function successCallback(response) {
                   if(response.data.isAvailable) {
                         self.login(username);
                   } else {

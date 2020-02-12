@@ -8,27 +8,27 @@ import 'dotenv/config';
 
 class App {
   constructor() {
-    this.server = express();
+    this.app = express();
     this.middlewares();
     this.routes();
   }
 
   middlewares() {
-    this.server.use(express.json());
-    this.server.use(cors());
-    this.server.use((req, res, next) => {
-      if (!this.server.get('chat')) {
-        this.server.set('chat', new Chat());
+    this.app.use(express.json());
+    this.app.use(cors({ origin: 'http://localhost', credentials: true }));
+    this.app.use((req, res, next) => {
+      if (!this.app.get('chat')) {
+        this.app.set('chat', new Chat());
       }
 
-      req.chat = this.server.get('chat');
+      req.chat = this.app.get('chat');
       next();
     });
   }
 
   routes() {
-    this.server.use(routes);
+    this.app.use(routes);
   }
 }
 
-export default new App();
+export default new App().app;
