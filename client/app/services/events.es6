@@ -43,19 +43,20 @@ class Events {
 
       getExistingActiveUsers() {
             var self = this;
-            this.$http({method: 'get', url: 'http://localhost:3000/users'}).then(function successCallback(response) {
+            this.$http({method: 'get', url: 'http://localhost:3000/v1/users'}).then(function successCallback(response) {
                   var users = response.data;
                   self.activeUsers = users;
                   self.hasDownloadUsers = true;
                   const currentUsername = self.Users.getUser().name;
-                  users = users.filter(user => user.name != currentUsername);
+                  users = users.filter(user => user != currentUsername);
                   self.Channels.addDMChannelsForUsers(users);
             });
       }
 
       sendTypingNotification() {
-            const data = {channel: this.Channels.activeChannel.id, user: this.Users.getUser(), type: 'user_typing'};
-            this.socket.emit(this.SocketEvent.USER_TYPING, data);
+        const data = {channel: this.Channels.activeChannel.id, user: this.Users.getUser(), type: 'user_typing'};
+        console.log(data);
+        this.socket.emit(this.SocketEvent.USER_TYPING, data);
       };
 
       sendStopTypingNotification() {
@@ -78,17 +79,15 @@ class Events {
             } }).then(function successCallback(response) {
                   self.Channels.addMessageToChannelWithID(aMessage);
                   aMessage.setChannelID(self.Channels.activeChannel.id);
-                  
-                  const text = response.text;
-                  const message = new Message(text, self.Users.getUser(), new Date());
-
-                  self.Notifications.send(message.user.name + ': ' + message.text);
-
-                  self.$http({method: 'get', url: 'http://localhost:3000/v1/channels/' + self.Channels.activeChannel.id }).then(function(res) {
-                        self.Channels.activeChannel.messages = res.data.map(m => {
-                              return new Message(m.all.text, m.all.user, new Date());
-                        }).reverse()
+                  self.Notifications.send(response.data.user.name + ': ' + response.data.text);
+                  response.data.channel = self.Channels.activeChannel.id;
+                  self.socket.emit(self.SocketEvent.NEW_MESSAGE, response.data );
+                  /*self.$http({method: 'get', url: 'http://localhost:3000/v1/channels/' + self.Channels.activeChannel.id }).then(function(res) {
+                    self.Channels.activeChannel.messages = res.data.map(m => {
+                          return new Message(m.text, m.user, new Date());
+                    }).reverse()
                   })
+                  */
             });
 
             serverMessage['channel'] = self.Channels.activeChannel.id;
@@ -96,7 +95,8 @@ class Events {
 
       receiveMessage(data) {
             console.log('Receiving Message');
-            const text = data.message.text;
+            console.log(data);
+            const text = data.text;
             const message = new Message(text, data.user, data.createdAt);
 
             this.Channels.addMessageToChannelWithID(message, data.channel);
@@ -110,7 +110,6 @@ class Events {
       }
 
       userJoined(data) {
-            console.log(data.username + ' joined');
             if(data.username !== this.Users.getUser().name) {
                   const joinedUser = new User(data.username);
                   this.Users.addUser(joinedUser);
@@ -133,12 +132,16 @@ class Events {
       }
 
       userStartedTyping(data) {
-            const name = data.user.name;
-            this.Channels.channels[data.channel].status = `${name} is typing...`;
+        console.log('START');
+        console.log(data);
+        const name = data.user.name;
+        this.Channels.channels[data.channel].status = `${name} is typing...`;
       };
 
       userStoppedTyping(data) {
-            this.Channels.channels[data.channel].status = '';
+        console.log('STOP');
+        console.log(data);
+        this.Channels.channels[data.channel].status = '';
       };
 }
 

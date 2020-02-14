@@ -1,7 +1,7 @@
 import Channel from '../models/Channel';
 import Message from '../models/Message';
 
-class UserController {
+class ChannelController {
   create(req, res) {
     const { name } = req.body;
 
@@ -24,21 +24,24 @@ class UserController {
 
   addMessage(req, res) {
     const { channel } = req.params;
-    const { user, text, createdAt } = req.body;
+    const { sender, text, createdAt } = req.body;
 
     const { chat } = req;
 
-    if (!channel || !chat.containsChannel(channel)) {
+    if (!channel) {
       return res.status(400).send('invalid channel');
     }
-
-    if (!user || !text) {
+    if (!sender || !text) {
       return res.status(400).send('invalid parameters');
+    }
+
+    if (!chat.containsChannel(channel)) {
+      chat.addChannel(new Channel(channel));
     }
 
     const channelObject = chat.getChannel(channel);
 
-    const message = new Message(user, text, createdAt);
+    const message = new Message(sender, text, createdAt);
 
     channelObject.addMessage(message);
 
@@ -50,7 +53,7 @@ class UserController {
 
     const { chat } = req;
 
-    if (!channel || !chat.containsChannel(channel)) {
+    if (!channel) {
       return res.status(400).send('invalid channel');
     }
 
@@ -70,4 +73,4 @@ class UserController {
   }
 }
 
-export default new UserController();
+export default new ChannelController();

@@ -1,17 +1,13 @@
 import User from '../../models/User';
-import { description as UserJoinedDescription } from './UserJoined';
+import Channel from '../../models/Channel';
+
+export const description = 'add user';
 
 export const handler = (chat, socket, username) => {
   if (chat.containsUser(username)) {
     return;
   }
 
-  socket.username = username;
   chat.addUser(new User(username));
-  socket.broadcast.emit(UserJoinedDescription, {
-    username,
-    numUsers: chat.getNumUsers(),
-  });
+  chat.addChannel(new Channel(username));
 };
-
-export const description = 'add user';

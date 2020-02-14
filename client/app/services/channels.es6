@@ -29,14 +29,16 @@ class Channels {
       }
 
       createDMChannelForUser(user) {
+        console.log(this.Users.getUser(), user);
+
             return new DMChannel(this.Users.getUser(), user);
       }
 
       addDMChannelsForUsers(users) {
             const self = this;
             users.forEach((user) => {
-                  var userChannel = self.createDMChannelForUser(new User(user.name));
-                  self.addChannel(userChannel);
+                let userChannel = self.createDMChannelForUser(new User(user));
+                self.addChannel(userChannel);
             });
       }
 
@@ -56,6 +58,7 @@ class Channels {
       }
 
       addMessageToChannelWithID(message, channelID = this.activeChannel.id) {
+        console.log(this.channels);
             this.channels[channelID].addMessage(message);
             if(this.activeChannel.id !== channelID) {
                   this.channels[channelID].unreadCount += 1;

@@ -2,10 +2,8 @@ import request from 'supertest';
 import app from '../../src/app';
 
 describe('Controllers -> UserController', () => {
-  const { server } = app;
-
   it('user can be joined on chat', () => {
-    return request(server)
+    return request(app)
       .post('/v1/join')
       .send({
         username: 'Pedro',
@@ -20,7 +18,7 @@ describe('Controllers -> UserController', () => {
   });
 
   it('user can be joined on chat WITH BLANK on Username', () => {
-    return request(server)
+    return request(app)
       .post('/v1/join')
       .send({
         username: 'Pedro Gabriel Rabelo',
@@ -36,7 +34,7 @@ describe('Controllers -> UserController', () => {
   });
 
   it('users can be listed from chat', () => {
-    return request(server)
+    return request(app)
       .get('/users')
       .expect(200)
       .then(res => {
@@ -52,7 +50,7 @@ describe('Controllers -> UserController', () => {
   });
 
   it('users can be listed from chat V1', () => {
-    return request(server)
+    return request(app)
       .get('/v1/users')
       .expect(200)
       .then(res => {
@@ -68,13 +66,13 @@ describe('Controllers -> UserController', () => {
   });
 
   it('check if contains user parameters error', () => {
-    return request(server)
+    return request(app)
       .get('/users/available')
       .expect(400);
   });
 
   it('check if contains existing user', () => {
-    return request(server)
+    return request(app)
       .get('/users/available?username=Pedro')
       .expect(200)
       .then(res => {
@@ -83,7 +81,7 @@ describe('Controllers -> UserController', () => {
   });
 
   it('check if contains not existing user', () => {
-    return request(server)
+    return request(app)
       .get('/users/available?username=Caraciolo')
       .expect(200)
       .then(res => {
@@ -92,7 +90,7 @@ describe('Controllers -> UserController', () => {
   });
 
   it('user can leave of chat', () => {
-    return request(server)
+    return request(app)
       .post('/v1/left')
       .send({
         username: 'Pedro Gabriel Rabelo',
@@ -108,7 +106,7 @@ describe('Controllers -> UserController', () => {
   });
 
   it('user can leave of chat VALIDATION', () => {
-    return request(server)
+    return request(app)
       .post('/v1/left')
       .send({
         username: 'Pedro Gabriel Rabelo',

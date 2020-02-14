@@ -40,10 +40,10 @@
                               <div class="message-container">
                                     <div class="meta">
                                           <span class="author"
-                                                ng-if="message.isUserMessage"><strong>{{message.user.name}}</strong></span><span
-                                                class="date"> {{message.createdAt | date: 'h:mm a'}}</span>
+                                                ng-if="message.isUserMessage"><strong>{{::message.user.name}}</strong></span><span
+                                                class="date"> {{::message.createdAt | date: 'h:mm a'}}</span>
                                     </div>
-                                    <p>{{message.text}}</p>
+                                    <p>{{::message.text}}</p>
                               </div>
                         </div>
                   </div>

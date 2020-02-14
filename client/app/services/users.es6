@@ -51,7 +51,7 @@ class Users {
 
       addUser(user) {
             this.activeUsers.push(user);
-            this.sendNewUserToServer(user);
+            // this.sendNewUserToServer(user);
       }
 
       getUser() {
@@ -60,7 +60,7 @@ class Users {
 
       setUser(username = this.randomID()) {
             this.user = new User(username);
-            this.socket.emit('add user', username);
+            this.sendNewUserToServer(this.user);
       }
 }
 

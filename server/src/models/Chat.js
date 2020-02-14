@@ -35,7 +35,7 @@ class Chat {
 
   getChannel(name) {
     if (!this.containsChannel(name)) {
-      throw new Error('Invalid channel name');
+      this.channels[name] = new Channel(name);
     }
     return this.channels[name];
   }
@@ -55,6 +55,12 @@ class Chat {
   removeUser(username) {
     if (this.containsUser(username)) {
       delete this.users[username];
+    }
+  }
+
+  removeChannel(channel) {
+    if (this.containsChannel(channel)) {
+      delete this.channels[channel];
     }
   }
 }

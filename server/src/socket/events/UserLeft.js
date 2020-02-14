@@ -1,3 +1,10 @@
-const handler = () => {};
+export const description = 'user left';
 
-export default handler;
+export const handler = (socket, chat) => {
+  chat.removeUser(socket.username);
+  chat.removeChannel(socket.username);
+
+  socket.broadcast.emit(description, {
+    username: socket.username,
+  });
+};

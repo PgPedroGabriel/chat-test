@@ -1,3 +1,5 @@
-const handler = () => {};
+export const description = 'user typing';
 
-export default handler;
+export const handler = (socket, data) => {
+  socket.broadcast.emit(description, data);
+};

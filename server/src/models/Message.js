@@ -1,6 +1,9 @@
 class Message {
-  constructor(user, text, createdAt = null) {
-    this.user = user;
+  constructor(sender, text, createdAt = null) {
+    this.sender = sender;
+    this.user = {
+      name: sender,
+    };
     this.text = text;
     this.createdAt = createdAt === null ? new Date() : createdAt;
   }
