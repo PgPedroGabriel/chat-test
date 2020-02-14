@@ -41,6 +41,9 @@ describe('Controllers -> ChannelController', () => {
       text: 'Message 1',
       sender: 'Pedro Gabriel',
       createdAt: new Date().toISOString(),
+      user: {
+        name: 'Pedro Gabriel',
+      },
     };
 
     return request(app)
